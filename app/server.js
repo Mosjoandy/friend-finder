@@ -19,22 +19,24 @@ app.get("/survey", function(req, res) {
 //////////////////////////show me the friendlist//////////////////////////////////
 
 app.get("/friends", function(req, res) {
-    console.log(friends);
-    return res.json(friends);
+    // res.json(friends);
+
+    for (var i = 0; i < 2; i++) {
+        res.json(friends[i]);
+    }
+
+
 });
-
-////////////////////////listener from survey page////////////////////////////////////
-
-
 
 ////////////////////////whole list of friends////////////////////////////////////
 
 app.post("/friends", function(req, res) {
-    res.send("You added a new friend")
+    res.send("You are searching for a new friend!")
    
     var newFriend = req.body;
     
     friends.push(newFriend);
+
     console.log(req.body);
 });
 
