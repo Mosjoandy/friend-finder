@@ -19,14 +19,37 @@ app.get("/survey", function(req, res) {
 //////////////////////////show me the friendlist//////////////////////////////////
 
 app.get("/friends", function(req, res) {
-    // res.json(friends);
-
-    for (var i = 0; i < 2; i++) {
-        res.json(friends[i]);
-    }
-
+    res.json(friends);
 
 });
+
+//////////////////////////compare to the friendslist//////////////////////////////////
+
+// app.post("/friends", function(req, res) {
+
+//     var friendMatch = {
+//         name: "",
+//         photo: "",
+//         scoreDifference: 9000
+//     }
+
+//     var newFriend = req.body;
+//     var friendScores = newFriend.scores;
+
+//     for (var i = 0; friends.length; i++) {
+//         console.log(friends[i].name);
+//     }
+    // forloop all friends back
+    // forloop through all the scores arrays
+    // friends scores - user's score
+    // if (difference <= 5) {
+        // get friends name
+        // get friends photo
+    // }
+    // push found friend into a new array
+    // modal the result of the new array[0] to survey page
+
+// });
 
 ////////////////////////whole list of friends////////////////////////////////////
 
