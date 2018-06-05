@@ -97,13 +97,39 @@
                         </form>
                         <br>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-primary btn-md" id="submission">Find your friend!</button>
+                                <button type="submit" class="btn btn-primary btn-md" id="submission"  data-toggle="modal" data-target="#exampleModalLong">Find your friend!</button>
                             </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- modal shits -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Your Friend Match</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="matchedName"></div>
+                <div id="matchedPhoto"></div>               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 
 <script type="text/javascript">
 $("#submission").on("click", function(event) {
@@ -124,13 +150,23 @@ $("#submission").on("click", function(event) {
 
     console.log(newFriend);
 
+    newFriend.scores = newFriend.scores.map(function (score) {
+        return parseInt(score);
+
+    });
+
     $.post("/friends", newFriend)
     .then(function(data) {
         console.log(data);
 
+        $("#matchedName").text(newFriend.name)
+        $("#matchedPhoto").attr("src", newFriend.photo)
+
     });
 
 });
+
+
 
 </script>
 
