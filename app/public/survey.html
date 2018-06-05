@@ -5,30 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Survey</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container pt-3">
         <div class="row">
             <div class="col-md-12">
                 <div class= "card card-defauilt">
                     <div class="card-body">
                         <form method="POST" role="form">
+
+                            
                             <div class="form-group">
-                                <label for="name">Name</label>
+                                <label for="name" placeholder="John Smith">Your Name</label>
                                 <input type="text" class="form-control" id="name">
                             </div>
 
                             <div class="form-group">
-                                <label for="photo">Link to photo</label>
+                                <label for="photo" placeholder="https://www.google.com/pic.jpg">Link to photo</label>
                                 <input type="text" class="form-control" id="photo">
                             </div>  
 
                             <div class="form-group">
-                                <label for="question1">You like the color blue</label>
+                                <label for="question1">How patriotic are you?</label>
                                     <select class="form-control" id="question1">
                                         <option>1</option>
                                         <option>2</option>
@@ -39,7 +40,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="question2">You like dogs</label>
+                                <label for="question2">Flying is the future</label>
                                     <select class="form-control" id="question2">
                                         <option>1</option>
                                         <option>2</option>
@@ -50,7 +51,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="question3">You like cats</label>
+                                <label for="question3">Possibility that magic exists</label>
                                     <select class="form-control" id="question3">
                                         <option>1</option>
                                         <option>2</option>
@@ -61,7 +62,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="question4">You like pokemon</label>
+                                <label for="question4">How well you know a form of martial art</label>
                                     <select class="form-control" id="question4">
                                         <option>1</option>
                                         <option>2</option>
@@ -72,18 +73,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="question4">You like pokemon</label>
-                                    <select class="form-control" id="question4">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="question5">You are mean</label>
+                                <label for="question5">You believe there is a "sixth" sense</label>
                                     <select class="form-control" id="question5">
                                         <option>1</option>
                                         <option>2</option>
@@ -93,10 +83,9 @@
                                     </select>
                             </div>
 
-
                         </form>
                         <br>
-                            <div class="text-right">
+                            <div class="text-center">
                                 <button type="submit" class="btn btn-primary btn-md" id="submission"  data-toggle="modal" data-target="#exampleModalLong">Find your friend!</button>
                             </div>
                     </div>
@@ -105,36 +94,37 @@
         </div>
     </div>
 
-    <!-- modal shits -->
+    <!-- modal -->
     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Your Friend Match</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                <h5 class="modal-title mx-auto d-block" id="exampleModalLongTitle">Your Match</h5>
                 </button>
             </div>
             <div class="modal-body">
-                <div id="matchedName"></div>
-                <div id="matchedPhoto"></div>               
+                <div class="text-center" id="matchedName"></div>
+                <hr>
+                <img class= "rounded mx-auto d-block" width="400px" src="" id="matchedPhoto"></img>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="/survey"><button type="button" class="btn btn-danger">Find Again!</button></a>
+                <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
             </div>
             </div>
         </div>
     </div>
 
-
-
-
-
-
 <script type="text/javascript">
+
+// Form submission
 $("#submission").on("click", function(event) {
+    
+    //Prevents the page refresh
     event.preventDefault();
 
+    // Making a new friend object using the values from form
+    // Name, photo url, and 5 questions on scale of 1-5
     var newFriend = {
         name: $("#name").val().trim(),
         photo: $("#photo").val().trim(),
@@ -148,8 +138,10 @@ $("#submission").on("click", function(event) {
             ]
                 };
 
+    // Show it works!
     console.log(newFriend);
 
+    // Make all the questions strings into integers using .map method (possibly redundant... since we will parseInt in the js)
     newFriend.scores = newFriend.scores.map(function (score) {
         return parseInt(score);
 
@@ -159,14 +151,15 @@ $("#submission").on("click", function(event) {
     .then(function(data) {
         console.log(data);
 
-        $("#matchedName").text(newFriend.name)
-        $("#matchedPhoto").attr("src", newFriend.photo)
+        // hook in the new match using a modal
+        $("#matchedName").text(data.name);
+        $("#matchedPhoto").attr("src", data.photo);
 
+        // Empty out the name and photo fields
+        $("#name").val(" ");
+        $("#photo").val(" ");
     });
-
 });
-
-
 
 </script>
 
